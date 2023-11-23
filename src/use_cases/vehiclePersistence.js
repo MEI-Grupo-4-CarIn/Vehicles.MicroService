@@ -16,6 +16,21 @@ class VehiclePersistence {
 
         return this.vehicleRepository.create(vehicle);
     }
+
+    async update(id, updatedVehicleData) {
+        const vehicle = new VehicleEntity(updatedVehicleData);
+
+        const validation = await vehicle.validator();
+        if (!validation.isValid) {
+            throw new Error(validation.errors.join(', '));
+        }
+
+        return this.vehicleRepository.update(id, updatedVehicleData);
+    }
+
+    async delete(id) {
+        return this.vehicleRepository.delete(id);
+    }
 }
 
 module.exports = VehiclePersistence;
