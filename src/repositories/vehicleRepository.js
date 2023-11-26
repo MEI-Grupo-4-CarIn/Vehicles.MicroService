@@ -2,6 +2,14 @@ const VehicleModel = require('../frameworks/database/vehicleModel');
 
 class VehicleRepository {
     
+    async getById(id) {
+        return await VehicleModel.findById(id);
+    }
+    
+    async getByLicensePlate(licensePlate) {
+        return await VehicleModel.findOne({ licensePlate: licensePlate });
+    }
+
     async create(vehicle) {
         const newVehicle = new VehicleModel(vehicle);
         return await newVehicle.save();
