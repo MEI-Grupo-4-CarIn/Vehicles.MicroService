@@ -1,26 +1,45 @@
 exports.VehicleEntity = class VehicleEntity {
-    constructor(id, model, brand, licensePlate, vin, color, registerDate, acquisitionDate, category, kms, capacity, fuelType, averageFuelConsumption, status) {
-        this.id = id;
-        this.model = model;
-        this.brand = brand;
-        this.licensePlate = licensePlate;
-        this.vin = vin;
-        this.color = color;
-        this.registerDate = registerDate;
-        this.acquisitionDate = acquisitionDate;
-        this.category = category;
-        this.kms = kms;
-        this.capacity = capacity;
-        this.fuelType = fuelType;
-        this.averageFuelConsumption = averageFuelConsumption;
-        this.status = status;
+    constructor(data) {
+        const fields = VehicleEntity.getFields();
+        fields.forEach(field => {
+            if (field in data) {
+                this[field] = data[field];
+            }
+        });
+    }
+
+    static getFields() {
+        return ['model',
+            'brand',
+            'licensePlate',
+            'vin',
+            'color',
+            'registerDate',
+            'acquisitionDate',
+            'category',
+            'kms',
+            'capacity',
+            'fuelType',
+            'averageFuelConsumption',
+            'status'];
     }
 
     async validator() {
-        if (!this.id || !this.model || !this.brand || !this.licensePlate || !this.vin || !this.color || !this.registerDate || !this.acquisitionDate || !this.category || !this.kms || !this.capacity || !this.fuelType || !this.averageFuelConsumption || !this.status) {
-            throw new Error('All fields are required');
+        if (Object.keys(this).length === 0) {
+            throw new Error('Payload cannot be empty.');
         }
-        
-        // Add more specific validations here if needed
+
+        const fields = VehicleEntity.getFields();
+        const errors = [];
+        for (let field of fields) {
+            if (this[field] !== undefined && (this[field] === null || this[field] === '')) {
+                errors.push(`${field} cannot be null or empty`);
+            }
+            // Add more specific validations here if needed
+        }
+        return {
+            isValid: errors.length === 0,
+            errors
+        };
     }
 }

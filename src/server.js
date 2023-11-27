@@ -11,7 +11,7 @@ mongoose.Promise = global.Promise;
 mongoose.connect(uri).then(() => { 
     console.log("Successfully connected to MongoDB.");
 }).catch(err => {
-    console.error("Connection error", err);
+    console.error("MongoDB connection error", err);
 }) 
 
 app.use(express.json());
