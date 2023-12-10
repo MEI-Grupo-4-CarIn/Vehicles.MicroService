@@ -2,9 +2,8 @@ const express = require('express');
 const mongoose = require('mongoose');
 const app = express();
 const port = 3000;
+require('dotenv').config({ path: __dirname + '/.env' });
 const vehicleRoute = require('./interface_adapters/routes/vehicleRoute');
-
-require('dotenv').config();
 
 const uri = process.env.MONGO_URI;
 mongoose.Promise = global.Promise;

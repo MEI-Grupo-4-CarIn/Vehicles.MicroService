@@ -34,6 +34,20 @@ class VehicleController {
             res.status(400).json({ message: error.message });
         }
     }
+    
+    async getById(req, res) {
+        try {
+            const { id } = req.params;
+            const vehicle = await this.vehiclePersistence.getById(id);
+            res.status(200).json(vehicle);
+        } catch (error) {
+            if (error instanceof NotFoundError) {
+                return res.status(404).json({ message: error.message });
+            } else {
+                res.status(400).json({ message: error.message });
+            }
+        }
+    }
 
     async getByLicensePlate(req, res) {
         try {
