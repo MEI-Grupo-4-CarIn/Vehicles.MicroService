@@ -39,6 +39,15 @@ class VehiclePersistence {
         return this.vehicleRepository.delete(id);
     }
 
+    async getById(id) {
+        const vehicle = await this.vehicleRepository.getById(id);
+        if (!vehicle) {
+            throw new NotFoundError('Vehicle not found.');
+        }
+        
+        return vehicle;
+    }
+
     async getByLicensePlate(licensePlate) {
         const vehicle = await this.vehicleRepository.getByLicensePlate(licensePlate);
         if (!vehicle) {

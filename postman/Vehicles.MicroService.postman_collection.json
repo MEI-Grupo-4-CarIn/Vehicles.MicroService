@@ -1,0 +1,121 @@
+{
+	"info": {
+		"_postman_id": "0c10cfce-75d1-42b6-9ec5-54c1041cecc9",
+		"name": "Vehicles.MicroService",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "13807037"
+	},
+	"item": [
+		{
+			"name": "Create",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"model\": \"A1\",\r\n    \"brand\": \"Audi\",\r\n    \"licensePlate\": \"24-CD-22\",\r\n    \"vin\": \"12345678901234564\",\r\n    \"color\": \"white\",\r\n    \"registerDate\": \"2020-12-10\",\r\n    \"acquisitionDate\": \"2021-01-01\",\r\n    \"category\": \"city\",\r\n    \"kms\": 134000,\r\n    \"capacity\": 5,\r\n    \"fuelType\": \"diesel\",\r\n    \"averageFuelConsumption\": 6.5,\r\n    \"status\": \"inUse\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{vehicles-microservice-url}}api/vehicles/create",
+					"host": [
+						"{{vehicles-microservice-url}}api"
+					],
+					"path": [
+						"vehicles",
+						"create"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Update",
+			"request": {
+				"method": "PATCH",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"status\": \"repairing\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{vehicles-microservice-url}}api/vehicles/update/6575972b0e7beb961ae509e9",
+					"host": [
+						"{{vehicles-microservice-url}}api"
+					],
+					"path": [
+						"vehicles",
+						"update",
+						"6575972b0e7beb961ae509e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "Delete",
+			"request": {
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "{{vehicles-microservice-url}}api/vehicles/delete/6575972b0e7beb961ae509e9",
+					"host": [
+						"{{vehicles-microservice-url}}api"
+					],
+					"path": [
+						"vehicles",
+						"delete",
+						"6575972b0e7beb961ae509e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetById",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{vehicles-microservice-url}}api/vehicles/6575972b0e7beb961ae509e9",
+					"host": [
+						"{{vehicles-microservice-url}}api"
+					],
+					"path": [
+						"vehicles",
+						"6575972b0e7beb961ae509e9"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "GetByLicensePlate",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{vehicles-microservice-url}}api/vehicles/getByLicensePlate/24-CD-22",
+					"host": [
+						"{{vehicles-microservice-url}}api"
+					],
+					"path": [
+						"vehicles",
+						"getByLicensePlate",
+						"24-CD-22"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}
