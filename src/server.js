@@ -1,5 +1,7 @@
 const express = require('express');
 const mongoose = require('mongoose');
+const swaggerUI = require('swagger-ui-express');
+const swaggerSpec = require('./swagger');
 const app = express();
 const port = 3000;
 require('dotenv').config({ path: __dirname + '/.env' });
@@ -14,8 +16,10 @@ mongoose.connect(uri).then(() => {
 }) 
 
 app.use(express.json());
+app.use('/swagger', swaggerUI.serve, swaggerUI.setup(swaggerSpec));
 app.use('/api', vehicleRoute);
 
 app.listen(port, () => {
- console.log(`Vehicles.MicroService listening at http://localhost:${port}`);
+ console.log(`Vehicles.MicroService listening at http://localhost:${port}/swagger`);
 });
+
