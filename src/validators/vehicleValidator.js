@@ -12,11 +12,9 @@ class VehicleValidator {
         category: Joi.string().required(),
         kms: Joi.number().required(),
         capacity: Joi.number().required(),
-        fullType: Joi.string().valid('diesel', 'petrol', 'eletric').required(),
+        fuelType: Joi.string().valid('diesel', 'petrol', 'eletric').required(),
         averageFuelConsumption: Joi.number().required(),
-        status: Joi.string().valid('none', 'permanent', 'inUse', 'repairing').required(),
-        avoidTolls: Joi.boolean(),
-        avoidHighways: Joi.boolean()
+        status: Joi.string().valid('none', 'permanent', 'inUse', 'repairing').required()
     });
 
     static updateVehicleSchema = Joi.object({
@@ -25,9 +23,7 @@ class VehicleValidator {
         kms: Joi.number(),
         capacity: Joi.number(),
         averageFuelConsumption: Joi.number(),
-        status: Joi.string().valid('none', 'permanent', 'inUse', 'repairing'),
-        avoidTolls: Joi.boolean(),
-        avoidHighways: Joi.boolean()
+        status: Joi.string().valid('none', 'permanent', 'inUse', 'repairing')
     }).min(1);
 
     static validateCreate(data) {
