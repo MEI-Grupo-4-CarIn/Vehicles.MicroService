@@ -79,7 +79,7 @@ const vehicleController = new VehicleController();
  *       400:
  *         description: Error creating the vehicle
  */
-router.post('/vehicles/create', authMiddleware(['Admin', 'Manager']), (req, res) => vehicleController.createVehicle(req, res));
+router.post('/vehicles/create', authMiddleware(['Manager']), (req, res) => vehicleController.createVehicle(req, res));
 
 /**
  * @swagger
@@ -109,7 +109,7 @@ router.post('/vehicles/create', authMiddleware(['Admin', 'Manager']), (req, res)
  *       400:
  *         description: Error updating the vehicle
  */
-router.patch('/vehicles/update/:id', authMiddleware(['Admin', 'Manager']), (req, res) => vehicleController.updateVehicle(req, res));
+router.patch('/vehicles/update/:id', authMiddleware(['Manager']), (req, res) => vehicleController.updateVehicle(req, res));
 
 /**
  * @swagger
@@ -132,7 +132,7 @@ router.patch('/vehicles/update/:id', authMiddleware(['Admin', 'Manager']), (req,
  *       400:
  *         description: Error deleting the vehicle
  */
-router.delete('/vehicles/delete/:id', authMiddleware(['Admin', 'Manager']), (req, res) => vehicleController.deleteVehicle(req, res));
+router.delete('/vehicles/delete/:id', authMiddleware(['Manager']), (req, res) => vehicleController.deleteVehicle(req, res));
 
 /**
  * @swagger
@@ -157,7 +157,7 @@ router.delete('/vehicles/delete/:id', authMiddleware(['Admin', 'Manager']), (req
  *       400:
  *         description: Error obtaining the vehicle
  */
-router.get('/vehicles/:id', authMiddleware(['Admin', 'Manager']), (req, res) => vehicleController.getById(req, res));
+router.get('/vehicles/:id', authMiddleware(['Manager']), (req, res) => vehicleController.getById(req, res));
 
 /**
  * @swagger
@@ -195,6 +195,6 @@ router.get('/vehicles/:id', authMiddleware(['Admin', 'Manager']), (req, res) => 
  *       400:
  *         description: Error obtaining the vehicle
  */
-router.get('/vehicles/getByLicensePlate/:licensePlate', authMiddleware(['Admin', 'Manager']), (req, res) => vehicleController.getByLicensePlate(req, res));
+router.get('/vehicles/getByLicensePlate/:licensePlate', authMiddleware(['Manager']), (req, res) => vehicleController.getByLicensePlate(req, res));
 
 module.exports = router;
