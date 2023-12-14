@@ -23,6 +23,15 @@ class VehicleRepository {
     async delete(id) {
         await VehicleModel.findByIdAndDelete(id);
     }
+
+    async getAll() {
+        try {
+            const allVehicles = await VehicleModel.find();
+            return allVehicles;
+        } catch (error) {
+            throw new Error(`Error getting all vehicles from the repository: ${error.message}`);
+        }
+    }
 }
 
 module.exports = VehicleRepository;

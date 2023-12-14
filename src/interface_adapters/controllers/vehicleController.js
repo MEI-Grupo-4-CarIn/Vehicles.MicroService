@@ -62,6 +62,15 @@ class VehicleController {
             }
         }
     }
+
+    async getAllVehicles(req, res) {
+        try {
+            const vehicles = await this.vehiclePersistence.getAllVehicles();
+            res.status(200).json(vehicles);
+        } catch (error) {
+            res.status(500).json({ message: error.message });
+        }
+    }
 }
 
 module.exports = VehicleController;
