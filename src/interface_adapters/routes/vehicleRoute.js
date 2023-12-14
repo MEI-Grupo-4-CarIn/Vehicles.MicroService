@@ -158,7 +158,19 @@ router.delete('/vehicles/delete/:id', (req, res) => vehicleController.deleteVehi
      */
 router.get('/vehicles/:id', (req, res) => vehicleController.getById(req, res));
 
-    /**
+     /**
+      * @swagger
+      * /api/vehicles/getAllVehicles:
+      *   get:
+      *     tags:
+      *       - Vehicles
+      *     summary:
+      *     responses:
+      *       200:
+      *         description: Vehicles obtained successfully.
+      */
+ router.get('/vehicles', (req, res) => vehicleController.getAllVehicles(req, res));
+     /**
      * @swagger
      * /api/vehicles/licensePlate:
      *   get:
