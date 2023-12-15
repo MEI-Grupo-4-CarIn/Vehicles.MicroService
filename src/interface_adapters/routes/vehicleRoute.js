@@ -1,4 +1,5 @@
 const express = require('express');
+const authMiddleware = require('../../middlewares/authMiddleware');
 const VehicleController = require('../controllers/vehicleController');
 
 const router = express.Router();
@@ -78,121 +79,122 @@ const vehicleController = new VehicleController();
  *       400:
  *         description: Error creating the vehicle
  */
-router.post('/vehicles/create', (req, res) => vehicleController.createVehicle(req, res));
+router.post('/vehicles/create', authMiddleware(['Manager']), (req, res) => vehicleController.createVehicle(req, res));
 
-     /**
-     * @swagger
-     * /api/vehicles/update:
-     *   patch:
-     *     tags:
-     *       - Vehicles
-     *     summary:
-     *     parameters:
-     *       - in: path
-     *         name: id
-     *         required: true
-     *         description: Vehicle ID
-     *         type: string
-     *       - in: body
-     *         name: body
-     *         required: true
-     *         schema:
-     *           $ref: '#/definitions/Vehicle'
-     *     responses:
-     *       200:
-     *         description: Vehicle updated successfully
-     *         schema:
-     *           $ref: '#/definitions/Vehicle'
-     *       404:
-     *         description: Vehicle not found
-     *       400:
-     *         description: Error updating the vehicle
-     */
-router.patch('/vehicles/update/:id', (req, res) => vehicleController.updateVehicle(req, res));
+/**
+ * @swagger
+ * /api/vehicles/update:
+ *   patch:
+ *     tags:
+ *       - Vehicles
+ *     summary:
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Vehicle ID
+ *         type: string
+ *       - in: body
+ *         name: body
+ *         required: true
+ *         schema:
+ *           $ref: '#/definitions/Vehicle'
+ *     responses:
+ *       200:
+ *         description: Vehicle updated successfully
+ *         schema:
+ *           $ref: '#/definitions/Vehicle'
+ *       404:
+ *         description: Vehicle not found
+ *       400:
+ *         description: Error updating the vehicle
+ */
+router.patch('/vehicles/update/:id', authMiddleware(['Manager']), (req, res) => vehicleController.updateVehicle(req, res));
 
-    /**
-     * @swagger
-     * /api/vehicles/delete:
-     *   delete:
-     *     tags:
-     *       - Vehicles
-     *     summary:
-     *     parameters:
-     *       - in: path
-     *         name: id
-     *         required: true
-     *         description: Vehicle ID
-     *         type: string
-     *     responses:
-     *       204:
-     *         description: Vehicle deleted successfully
-     *       404:
-     *         description: Vehicle not found
-     *       400:
-     *         description: Error deleting the vehicle
-     */
-router.delete('/vehicles/delete/:id', (req, res) => vehicleController.deleteVehicle(req, res));
+/**
+ * @swagger
+ * /api/vehicles/delete:
+ *   delete:
+ *     tags:
+ *       - Vehicles
+ *     summary:
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Vehicle ID
+ *         type: string
+ *     responses:
+ *       204:
+ *         description: Vehicle deleted successfully
+ *       404:
+ *         description: Vehicle not found
+ *       400:
+ *         description: Error deleting the vehicle
+ */
+router.delete('/vehicles/delete/:id', authMiddleware(['Manager']), (req, res) => vehicleController.deleteVehicle(req, res));
 
-     /**
-     * @swagger
-     * /api/vehicles/getById:
-     *   get:
-     *     tags:
-     *       - Vehicles
-     *     summary:
-     *     parameters:
-     *       - in: path
-     *         name: id
-     *         required: true
-     *         description: Vehicle ID
-     *         type: string
-     *     responses:
-     *       200:
-     *         description: Vehicle obtained successfully
-     *         schema:
-     *           $ref: '#/definitions/Vehicle'
-     *       404:
-     *         description: Vehicle not found
-     *       400:
-     *         description: Error obtaining the vehicle
-     */
-router.get('/vehicles/:id', (req, res) => vehicleController.getById(req, res));
+/**
+ * @swagger
+ * /api/vehicles/getById:
+ *   get:
+ *     tags:
+ *       - Vehicles
+ *     summary:
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         required: true
+ *         description: Vehicle ID
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Vehicle obtained successfully
+ *         schema:
+ *           $ref: '#/definitions/Vehicle'
+ *       404:
+ *         description: Vehicle not found
+ *       400:
+ *         description: Error obtaining the vehicle
+ */
+router.get('/vehicles/:id', authMiddleware(['Manager']), (req, res) => vehicleController.getById(req, res));
 
-     /**
-      * @swagger
-      * /api/vehicles/getAllVehicles:
-      *   get:
-      *     tags:
-      *       - Vehicles
-      *     summary:
-      *     responses:
-      *       200:
-      *         description: Vehicles obtained successfully.
-      */
- router.get('/vehicles', (req, res) => vehicleController.getAllVehicles(req, res));
-     /**
-     * @swagger
-     * /api/vehicles/licensePlate:
-     *   get:
-     *     tags:
-     *       - Vehicles
-     *     summary:
-     *     parameters:
-     *       - in: path
-     *         name: licensePlate
-     *         required: true
-     *         description: Vehicle license plate
-     *         type: string
-     *     responses:
-     *       200:
-     *         description: Vehicle obtained successfully
-     *         schema:
-     *           $ref: '#/definitions/Vehicle'
-     *       404:
-     *         description: Vehicle not found
-     *       400:
-     *         description: Error obtaining the vehicle
-     */
-router.get('/vehicles/getByLicensePlate/:licensePlate', (req, res) => vehicleController.getByLicensePlate(req, res));
+/**
+ * @swagger
+ * /api/vehicles/getAllVehicles:
+ *   get:
+ *     tags:
+ *       - Vehicles
+ *     summary:
+ *     responses:
+ *       200:
+ *         description: Vehicles obtained successfully.
+ */
+ router.get('/vehicles', authMiddleware(['Admin', 'Manager']), (req, res) => vehicleController.getAllVehicles(req, res));
+ 
+/**
+ * @swagger
+ * /api/vehicles/licensePlate:
+ *   get:
+ *     tags:
+ *       - Vehicles
+ *     summary:
+ *     parameters:
+ *       - in: path
+ *         name: licensePlate
+ *         required: true
+ *         description: Vehicle license plate
+ *         type: string
+ *     responses:
+ *       200:
+ *         description: Vehicle obtained successfully
+ *         schema:
+ *           $ref: '#/definitions/Vehicle'
+ *       404:
+ *         description: Vehicle not found
+ *       400:
+ *         description: Error obtaining the vehicle
+ */
+router.get('/vehicles/getByLicensePlate/:licensePlate', authMiddleware(['Manager']), (req, res) => vehicleController.getByLicensePlate(req, res));
 
 module.exports = router;
