@@ -1,5 +1,10 @@
 # Vehicles.MicroService
 
+[![Docker Hub](https://img.shields.io/badge/Docker%20Hub-Vehicles.MicroService-blue)](https://hub.docker.com/r/duartefernandes/vehicles-microservice)
+[![Docker Image Version (latest by date)](https://img.shields.io/docker/v/duartefernandes/vehicles-microservice?label=version)](https://hub.docker.com/r/duartefernandes/vehicles-microservice)
+[![Docker Image Size (latest by date)](https://img.shields.io/docker/image-size/duartefernandes/vehicles-microservice?label=size)](https://hub.docker.com/r/duartefernandes/vehicles-microservice)
+[![Docker Pulls](https://img.shields.io/docker/pulls/duartefernandes/vehicles-microservice)](https://hub.docker.com/r/duartefernandes/vehicles-microservice)
+
 This is a microservice for managing vehicles, developed as part of a master's degree project. It's built with _Node.js_ and _Express.js_, and uses _MongoDB_ for data persistence. The service provides endpoints for creating, updating, retrieving, and deleting vehicle records.
 
 This microservice is part of a larger project that includes other microservices and an API gateway. The other components of the project can be found at the following links:
