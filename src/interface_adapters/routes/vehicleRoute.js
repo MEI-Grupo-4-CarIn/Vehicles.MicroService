@@ -64,7 +64,7 @@ const vehicleController = new VehicleController();
  *   post:
  *     tags:
  *       - Vehicles
- *     summary:
+ *     summary: Create new vehicles
  *     parameters:
  *       - in: body
  *         name: body
@@ -87,7 +87,7 @@ router.post('/vehicles/create', authMiddleware(['Manager']), (req, res) => vehic
  *   patch:
  *     tags:
  *       - Vehicles
- *     summary:
+ *     summary: Update specific information about a certain vehicle by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -117,7 +117,7 @@ router.patch('/vehicles/update/:id', authMiddleware(['Manager']), (req, res) => 
  *   delete:
  *     tags:
  *       - Vehicles
- *     summary:
+ *     summary: Delete vehicle by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -140,7 +140,7 @@ router.delete('/vehicles/delete/:id', authMiddleware(['Manager']), (req, res) =>
  *   get:
  *     tags:
  *       - Vehicles
- *     summary:
+ *     summary: Get informations about a vehicle by ID
  *     parameters:
  *       - in: path
  *         name: id
@@ -165,7 +165,7 @@ router.get('/vehicles/:id', authMiddleware(['Manager']), (req, res) => vehicleCo
  *   get:
  *     tags:
  *       - Vehicles
- *     summary:
+ *     summary: Get informations about all vehicles in database
  *     responses:
  *       200:
  *         description: Vehicles obtained successfully.
@@ -178,7 +178,7 @@ router.get('/vehicles/:id', authMiddleware(['Manager']), (req, res) => vehicleCo
  *   get:
  *     tags:
  *       - Vehicles
- *     summary:
+ *     summary: Get vehicle information by license plate
  *     parameters:
  *       - in: path
  *         name: licensePlate
