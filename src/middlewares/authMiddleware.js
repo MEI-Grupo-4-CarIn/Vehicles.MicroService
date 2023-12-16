@@ -7,13 +7,13 @@ function authMiddleware(allowedRoles) {
     return function (req, res, next) {
         const userAuthHeader = req.headers.authorization;
         const serviceAuthHeader = req.headers['service-authorization'];
-        
+
         if (userAuthHeader) {
             const token = userAuthHeader.split(' ')[1];
             jwt.verify(token, PUB_KEY, { algorithms: ['RS256'] }, (err, user) => {
                 if (!err) {
                     // Check if the user's role is allowed
-                    if (allowedRoles.includes(user.role)) {
+                    if (allowedRoles.includes(user['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'])) {
                         req.user = user;
                         next();
                     } else {
