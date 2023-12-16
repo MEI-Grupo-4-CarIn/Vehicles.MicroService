@@ -39,6 +39,10 @@ jobs:
   test:
     name: Run Unit Tests
     runs-on: ubuntu-latest
+    env:
+      MONGO_URI: ${{ secrets.MONGO_URI }}
+      JWT_PUBLIC_KEY: ${{ secrets.JWT_PUBLIC_KEY }}
+      SERVICE_SECRET_KEY: ${{ secrets.SERVICE_SECRET_KEY }}
 
     steps:
     - name: Checkout repository
