@@ -30,4 +30,3 @@ app.use('/api', vehicleRoute);
 app.listen(port, () => {
  console.log(`Vehicles.MicroService listening at http://localhost:${port}/swagger`);
 });
-
