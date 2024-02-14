@@ -1,5 +1,6 @@
 const VehiclePersistence = require('../../use_cases/vehiclePersistence');
 const NotFoundError = require('../../utils/notFoundError');
+const Logger = require('../../frameworks/logging/logger');
 
 class VehicleController {
     constructor() {
@@ -9,8 +10,10 @@ class VehicleController {
     async createVehicle(req, res) {
         try {
             const vehicle = await this.vehiclePersistence.create(req.body);
+            Logger.info(`Vehicle created by the user '${req.user.email}' with success! Info: '${vehicle.id}'.`);
             res.status(201).json(vehicle);
         } catch (error) {
+            Logger.error(`Error creating vehicle: ${error.message}`);
             res.status(400).json({ message: error.message });
         }
     }
@@ -19,8 +22,10 @@ class VehicleController {
         try {
             const { id } = req.params;
             const updatedVehicle = await this.vehiclePersistence.update(id, req.body);
+            Logger.info(`Vehicle '${id}' successfully updated by the user '${req.user.email}'.`)
             res.status(200).json(updatedVehicle);
         } catch (error) {
+            Logger.error(`Error updating vehicle '${req.params.id}': ${error.message}`);
             res.status(400).json({ message: error.message });
         }
     }
@@ -29,8 +34,10 @@ class VehicleController {
         try {
             const { id } = req.params;
             await this.vehiclePersistence.delete(id);
+            Logger.info(`Vehicle '${id}' deleted by the user '${req.user.email}'.`)
             res.status(204).send();
         } catch (error) {
+            Logger.error(`Error deleting vehicle '${req.params.id}': ${error.message}`);
             res.status(400).json({ message: error.message });
         }
     }
@@ -41,6 +48,7 @@ class VehicleController {
             const vehicle = await this.vehiclePersistence.getById(id);
             res.status(200).json(vehicle);
         } catch (error) {
+            Logger.error(`Error obtaining vehicle '${req.params.id}': ${error.message}`);
             if (error instanceof NotFoundError) {
                 return res.status(404).json({ message: error.message });
             } else {
@@ -55,6 +63,7 @@ class VehicleController {
             const vehicle = await this.vehiclePersistence.getByLicensePlate(licensePlate);
             res.status(200).json(vehicle);
         } catch (error) {
+            Logger.error(`Error obtaining vehicle '${req.params.licensePlate}': ${error.message}`);
             if (error instanceof NotFoundError) {
                 return res.status(404).json({ message: error.message });
             } else {
@@ -68,6 +77,7 @@ class VehicleController {
             const vehicles = await this.vehiclePersistence.getAllVehicles();
             res.status(200).json(vehicles);
         } catch (error) {
+            Logger.error(`Error obtaining vehicles list '${req.params.id}': ${error.message}`);
             res.status(500).json({ message: error.message });
         }
     }
