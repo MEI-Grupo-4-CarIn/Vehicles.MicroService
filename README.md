@@ -7,7 +7,7 @@
 
 This is a microservice for managing vehicles, developed as part of a master's degree project. It's built with _Node.js_ and _Express.js_, and uses _MongoDB_ for data persistence. The service provides endpoints for creating, updating, retrieving, and deleting vehicle records.
 
-This microservice is part of a larger project that includes other microservices and an API gateway. The other components of the project can be found at the following links:
+This microservice is part of a larger project with other microservices and an API gateway. The other components of the project can be found at the following links:
  - [Auth.MicroService](https://github.com/duartefernandes/Auth.MicroService)
  - [Routes.MicroService](https://github.com/Rafa26Azevedo/Routes.MicroService)
  - [OcelotApiGateway](https://github.com/duartefernandes/OcelotApiGateway)
@@ -44,6 +44,7 @@ The following environment variables are used in this project:
 - `MONGO_URI`: The connection string for your MongoDB database.
 - `JWT_PUBLIC_KEY`: The public key used for JWT authentication.
 - `SERVICE_SECRET_KEY`: The secret key used by the service.
+- `ELASTICSEARCH_HOST`: The Elasticsearch host.
 
 Remember not to commit the `.env` file to the repository. This file is included in the `.gitignore` file to prevent it from being accidentally committed.
 
